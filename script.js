@@ -33,3 +33,43 @@ menuHamb.addEventListener("click", toggleOn);
 function toggleOn() {
     navbarHeader.classList.toggle("collapse");
 };
+
+
+// Feature 3
+// si on clique sur le bouton "Edit" de la première card, le texte de la card va se mettre 
+// en rouge de façon irréversible (sauf si on recharge la page).
+var myEditButton = document.getElementsByClassName('btn btn-sm btn-outline-secondary')[0]; // dans la collections HTML, je prend le premier
+
+
+myEditButton.addEventListener('click', putRedText);
+
+function putRedText() {
+    var cardChange = document.querySelector('p.card-text');
+    cardChange.style.color = 'red';
+}
+
+// Feature 4
+// si on clique sur le bouton "Edit" de la deuxième card, le texte de la card va se mettre en vert. 
+// Si on re-clique dessus, il redevient comme avant ! 
+//Tu l'as compris, il va falloir que tu cherches comment faire un "toggle" sur le style du texte.
+
+var myEditButton2 = document.querySelectorAll('div.btn-group')[1].children[1]; // dans la collections HTML, je prend le deuxième
+myEditButton2.addEventListener('click', putGreenText1,true);
+
+var statusButton = false;  // va permettre de checker la bascule vert ou pas
+function putGreenText1() {
+    var cardChange2 = document.querySelectorAll('p.card-text');  // je cherge l'élément à traiter
+    if (statusButton) {             // si statusButton est true, le texte est vert faut mettre en normal
+        statusButton = false;
+        cardChange2[1].style.color = '';
+    } else {                        // si statusButton est false, le texte est normale faut mettre en vert
+        statusButton = true;
+        cardChange2[1].style.color = 'green';
+    }
+}
+
+// Feature 5
+// si un utilisateur double clique sur la navbar en haut, tout Bootstrap disparaît et 
+// la page s'affiche comme si on avait oublié de mettre le CDN qui la relie au fichier CSS. 
+// Si possible, rends cette fonctionnalité réversible (un nouveau double-clic fait 
+// tout revenir à la normale).
