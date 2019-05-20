@@ -109,10 +109,9 @@ cardText.forEach((text, i ) => {
     textBackup[i] = cardText[i].innerHTML;
 });
 
-function hideCard(j) {
+function hideCard() {
     // [0] pour la première carte
-    console.log(buttonTest);
-    console.log(j);
+
     if (buttonTest) {             // si buttonTest est true, le texte disparait, réduit la taille
         buttonTest = false;
         cardText[0].innerHTML = '';
@@ -126,7 +125,7 @@ function hideCard(j) {
 // Fonctionne qu'avec la première carte
 buttonView[0].children[0].addEventListener('mouseover', hideCard);
 
-// multi-carte fonctionne pas
+// multi-carte fonctionne pas, pbl avec la boucle
 
 
 // Feature 7
@@ -134,7 +133,7 @@ buttonView[0].children[0].addEventListener('mouseover', hideCard);
 // va passer en premier (en haut à gauche). On va pouvoir faire tourner les cards !
 //var cardsToMove = document.querySelectorAll('div.row');
 
-let turnRightButton = document.querySelectorAll('a.btn:nth-child(2)')[0];
+let turnRightButton = document.querySelectorAll('a.btn:nth-child(2)')[0]; //élément bouton turnright
 
 turnRightButton.addEventListener('click',turnRight);
 
@@ -145,9 +144,10 @@ function turnRight(event){
     console.log(card);
 	cards.insertAdjacentHTML('afterbegin',card.outerHTML); //Ajoute la dernière carte en premier avec afterbegin
 	cards.removeChild(card);  // supprimme le dernier elemnt
-    event.preventDefault();   // bloque le comportement du navigateur et corrige le mouseover du Feature 6
+    event.preventDefault();   // bloque le comportement du navigateur par défaut
 }
 
 // Feature 8
+//non yet
 
 
