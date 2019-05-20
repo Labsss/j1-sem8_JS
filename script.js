@@ -101,7 +101,7 @@ doubleClicNavbar.addEventListener('dblclick', changeCDN);
 // var buttonView = document.querySelectorAll('div.btn-group')[0].children[0]; // dans la collections HTML, je prend le deuxième
 var buttonView = document.querySelectorAll('div.btn-group');
 var imageCard = document.querySelectorAll('img.card-img-top');
-var buttonTest = false;  // va permettre de checker la bascule vert ou pas
+var buttonTest = true;  // va permettre de checker la bascule vert ou pas
 
 // stocker les textes des 6 cards
 var textBackup = [];
@@ -109,10 +109,11 @@ var cardText = document.querySelectorAll('p.card-text');
 cardText.forEach((text, i ) => {
     textBackup[i] = cardText[i].innerHTML;
 });
-console.log(textBackup);
 
-function hideCard() {
+function hideCard(j) {
     // [0] pour la première carte
+    console.log(buttonTest);
+    console.log(j);
     let cardToHide = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
     if (buttonTest) {             // si buttonTest est true, le texte disparait, réduit la taille
         buttonTest = false;
@@ -125,4 +126,7 @@ function hideCard() {
     }
 }
 // buttonView.addEventListener('click', hideCard,true);
- buttonView[0].children[0].addEventListener('mouseover', hideCard);
+// for (let index=0; index < buttonView.length; index++) {
+//     buttonView[index].addEventListener('click', hideCard(index),true);
+// }
+buttonView[0].children[0].addEventListener('mouseover', hideCard);
