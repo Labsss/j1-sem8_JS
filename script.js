@@ -98,7 +98,6 @@ doubleClicNavbar.addEventListener('dblclick', changeCDN);
 // qu'à 20 % de sa taille d'origine et les boutons "Edit" / "View" restent visibles. 
 // Cette fonction sera réversible : s'il repasse sa souris, la card redevient normale !
 
-// var buttonView = document.querySelectorAll('div.btn-group')[0].children[0]; // dans la collections HTML, je prend le deuxième
 var buttonView = document.querySelectorAll('div.btn-group');
 var imageCard = document.querySelectorAll('img.card-img-top');
 var buttonTest = true;  // va permettre de checker la bascule vert ou pas
@@ -114,19 +113,41 @@ function hideCard(j) {
     // [0] pour la première carte
     console.log(buttonTest);
     console.log(j);
-    let cardToHide = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
     if (buttonTest) {             // si buttonTest est true, le texte disparait, réduit la taille
         buttonTest = false;
-        cardToHide[0].innerHTML = '';
+        cardText[0].innerHTML = '';
         imageCard[0].style.width = '20%';
     } else {                        // si statusButton est false, le texte est normale faut mettre en vert
         buttonTest = true;
-        cardToHide[0].innerHTML = textBackup[0];
+        cardText[0].innerHTML = textBackup[0];
         imageCard[0].style.width = '100%';
     }
-}
-// buttonView.addEventListener('click', hideCard,true);
-// for (let index=0; index < buttonView.length; index++) {
-//     buttonView[index].addEventListener('click', hideCard(index),true);
-// }
+};
+// Fonctionne qu'avec la première carte
 buttonView[0].children[0].addEventListener('mouseover', hideCard);
+
+// multi-carte fonctionne pas
+
+
+// Feature 7
+// si un utilisateur clique sur le bouton gris ==>, la dernière card (en bas à droite) 
+// va passer en premier (en haut à gauche). On va pouvoir faire tourner les cards !
+//var cardsToMove = document.querySelectorAll('div.row');
+
+let turnRightButton = document.querySelectorAll('a.btn:nth-child(2)')[0];
+
+turnRightButton.addEventListener('click',turnRight);
+
+function turnRight(event){
+	let cards = document.querySelectorAll('.album  .row')[0]; // je sélectionne le parent des cards
+    let card = document.getElementsByClassName('card')[5].parentElement; // ensemble des cards filles
+    console.log(cards);
+    console.log(card);
+	cards.insertAdjacentHTML('afterbegin',card.outerHTML); //Ajoute la dernière carte en premier avec afterbegin
+	cards.removeChild(card);  // supprimme le dernier elemnt
+    event.preventDefault();   // bloque le comportement du navigateur et corrige le mouseover du Feature 6
+}
+
+// Feature 8
+
+
