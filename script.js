@@ -54,7 +54,7 @@ function putRedText() {
 //Tu l'as compris, il va falloir que tu cherches comment faire un "toggle" sur le style du texte.
 
 var myEditButton2 = document.querySelectorAll('div.btn-group')[1].children[1]; // dans la collections HTML, je prend le deuxième
-myEditButton2.addEventListener('click', putGreenText1,true);
+myEditButton2.addEventListener('click', putGreenText1);
 
 var statusButton = false;  // va permettre de checker la bascule vert ou pas
 function putGreenText1() {
@@ -98,17 +98,31 @@ doubleClicNavbar.addEventListener('dblclick', changeCDN);
 // qu'à 20 % de sa taille d'origine et les boutons "Edit" / "View" restent visibles. 
 // Cette fonction sera réversible : s'il repasse sa souris, la card redevient normale !
 
-var buttonView = document.querySelectorAll('div.btn-group')[0].children[0]; // dans la collections HTML, je prend le deuxième
-buttonView.addEventListener('click', hideCard,true);
+// var buttonView = document.querySelectorAll('div.btn-group')[0].children[0]; // dans la collections HTML, je prend le deuxième
+var buttonView = document.querySelectorAll('div.btn-group');
+var imageCard = document.querySelectorAll('img.card-img-top');
+var buttonTest = false;  // va permettre de checker la bascule vert ou pas
 
-var statusButton = false;  // va permettre de checker la bascule vert ou pas
+// stocker les textes des 6 cards
+var textBackup = [];
+var cardText = document.querySelectorAll('p.card-text');
+cardText.forEach((text, i ) => {
+    textBackup[i] = cardText[i].innerHTML;
+});
+console.log(textBackup);
+
 function hideCard() {
-    var cardToHide = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
-    if (statusButton) {             // si statusButton est true, le texte est vert faut mettre en normal
-        statusButton = false;
-        cardToHide[0].textContent = '';
+    // [0] pour la première carte
+    let cardToHide = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
+    if (buttonTest) {             // si buttonTest est true, le texte disparait, réduit la taille
+        buttonTest = false;
+        cardToHide[0].innerHTML = '';
+        imageCard[0].style.width = '20%';
     } else {                        // si statusButton est false, le texte est normale faut mettre en vert
-        statusButton = true;
-        cardChange2[1].style.color = 'green';
+        buttonTest = true;
+        cardToHide[0].innerHTML = textBackup[0];
+        imageCard[0].style.width = '100%';
     }
 }
+// buttonView.addEventListener('click', hideCard,true);
+ buttonView[0].children[0].addEventListener('mouseover', hideCard);
