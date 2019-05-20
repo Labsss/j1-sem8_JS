@@ -140,12 +140,11 @@ turnRightButton.addEventListener('click',turnRight);
 function turnRight(event){
 	let cards = document.querySelectorAll('.album  .row')[0]; // je sélectionne le parent des cards
     let card = document.getElementsByClassName('card')[5].parentElement; // ensemble des cards filles
-    console.log(cards);
-    console.log(card);
 	cards.insertAdjacentHTML('afterbegin',card.outerHTML); //Ajoute la dernière carte en premier avec afterbegin
 	cards.removeChild(card);  // supprimme le dernier elemnt
     event.preventDefault();   // bloque le comportement du navigateur par défaut
 }
+
 
 // Feature 8
 //non yet
