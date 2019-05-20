@@ -58,7 +58,7 @@ myEditButton2.addEventListener('click', putGreenText1,true);
 
 var statusButton = false;  // va permettre de checker la bascule vert ou pas
 function putGreenText1() {
-    var cardChange2 = document.querySelectorAll('p.card-text');  // je cherge l'élément à traiter
+    var cardChange2 = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
     if (statusButton) {             // si statusButton est true, le texte est vert faut mettre en normal
         statusButton = false;
         cardChange2[1].style.color = '';
@@ -73,3 +73,42 @@ function putGreenText1() {
 // la page s'affiche comme si on avait oublié de mettre le CDN qui la relie au fichier CSS. 
 // Si possible, rends cette fonctionnalité réversible (un nouveau double-clic fait 
 // tout revenir à la normale).
+
+var cdnBootstrap = document.getElementsByTagName('link')[0]; //je récupère la balise link
+var doubleClicNavbar = document.querySelector('header'); // la zone header cliquable
+var headTag = document.querySelector('head');  //le parent à ajouter un child
+var statusHeader = false;
+
+var changeCDN = function () {
+  if (statusHeader == false) {
+    cdnBootstrap.parentNode.removeChild(cdnBootstrap);
+    statusHeader = true;
+  } else if (statusHeader == true) {
+    headTag.appendChild(cdnBootstrap);
+    statusHeader= false;
+  }
+};
+
+doubleClicNavbar.addEventListener('dblclick', changeCDN);
+
+
+// Feature 6
+// si un utilisateur passe sa souris sur le bouton "View" d'une card (n'importe laquelle), 
+// celle-ci va se réduire. Cela veut dire que le texte disparaît, l'image n'apparaîtra 
+// qu'à 20 % de sa taille d'origine et les boutons "Edit" / "View" restent visibles. 
+// Cette fonction sera réversible : s'il repasse sa souris, la card redevient normale !
+
+var buttonView = document.querySelectorAll('div.btn-group')[0].children[0]; // dans la collections HTML, je prend le deuxième
+buttonView.addEventListener('click', hideCard,true);
+
+var statusButton = false;  // va permettre de checker la bascule vert ou pas
+function hideCard() {
+    var cardToHide = document.querySelectorAll('p.card-text');  // je cherche l'élément à traiter
+    if (statusButton) {             // si statusButton est true, le texte est vert faut mettre en normal
+        statusButton = false;
+        cardToHide[0].textContent = '';
+    } else {                        // si statusButton est false, le texte est normale faut mettre en vert
+        statusButton = true;
+        cardChange2[1].style.color = 'green';
+    }
+}
